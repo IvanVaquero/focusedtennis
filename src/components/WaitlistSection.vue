@@ -1,16 +1,18 @@
 <template>
-  <section id="waitlist" class="py-32 bg-gray-50">
-    <div class="container-custom">
+  <section id="waitlist" class="py-32 bg-cover bg-center bg-no-repeat relative" style="background-image: url('/src/assets/images/waitlistImg.JPG')">
+    <!-- Overlay for better text readability -->
+    <div class="absolute inset-0 bg-black bg-opacity-60"></div>
+    <div class="container-custom relative z-10">
       <div class="text-center mb-20">
-        <h2 class="text-5xl font-bold text-gray-900 mb-8">
+        <h2 class="text-5xl font-bold text-white mb-8">
           Join the waitlist
         </h2>
-        <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+        <p class="text-xl text-gray-200 max-w-2xl mx-auto">
           Be first to access FocusedTennis and get exclusive early-bird pricing
         </p>
       </div>
 
-      <div v-if="submitted" class="max-w-2xl mx-auto text-center">
+      <div v-if="submitted" class="max-w-2xl mx-auto text-center relative z-10">
         <div class="bg-green-50 border border-green-200 rounded-3xl p-12">
           <div class="text-8xl mb-6">✅</div>
           <h3 class="text-3xl font-bold text-gray-900 mb-4">Welcome to FocusedTennis!</h3>
@@ -18,7 +20,7 @@
         </div>
       </div>
 
-      <div v-else class="max-w-2xl mx-auto">
+      <div v-else class="max-w-2xl mx-auto relative z-10">
         <div class="bg-white rounded-3xl p-12 shadow-xl">
           <form @submit.prevent="submitForm" class="space-y-8">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">

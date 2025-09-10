@@ -3,7 +3,7 @@
     <div class="container-custom">
       <div class="text-center mb-20">
         <h2 class="text-5xl font-bold text-gray-900 mb-8">
-          Loved by players
+          What our community says
         </h2>
       </div>
 

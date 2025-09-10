@@ -2,6 +2,7 @@
   <section id="services" class="h-[80vh] bg-white border-b-4 border-black">
     <div class="h-full flex">
       <div class="grid grid-cols-1 md:grid-cols-3 w-full">
+        <!-- TODO - Mental + Tactical + Mentorship -->
         <!-- Technique Column -->
         <div class="relative group cursor-pointer h-full">
           <div class="relative h-full overflow-hidden">
@@ -16,7 +17,7 @@
             
             <!-- Content Overlay -->
             <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-8">
-              <h3 class="text-3xl font-bold text-white mb-4 group-hover:text-yellow-300 transition-colors duration-300">Technique</h3>
+              <h3 class="text-3xl font-bold text-white mb-4 group-hover:text-yellow-300 transition-colors duration-300">Tactics</h3>
               <p class="text-white/90 text-lg leading-relaxed">Perfect your strokes with AI-powered analysis</p>
             </div>
           </div>
@@ -36,7 +37,7 @@
             
             <!-- Content Overlay -->
             <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-8">
-              <h3 class="text-3xl font-bold text-white mb-4 group-hover:text-yellow-300 transition-colors duration-300">Strategy</h3>
+              <h3 class="text-3xl font-bold text-white mb-4 group-hover:text-yellow-300 transition-colors duration-300">Mental Game</h3>
               <p class="text-white/90 text-lg leading-relaxed">Develop winning game plans and tactics</p>
             </div>
           </div>
@@ -56,7 +57,7 @@
             
             <!-- Content Overlay -->
             <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-8">
-              <h3 class="text-3xl font-bold text-white mb-4 group-hover:text-yellow-300 transition-colors duration-300">Mental Game</h3>
+              <h3 class="text-3xl font-bold text-white mb-4 group-hover:text-yellow-300 transition-colors duration-300">Mentorship</h3>
               <p class="text-white/90 text-lg leading-relaxed">Build confidence and competitive mindset</p>
             </div>
           </div>

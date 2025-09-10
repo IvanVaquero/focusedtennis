@@ -59,7 +59,7 @@
             
             <!-- Content -->
             <div class="text-center">
-              <h3 class="text-3xl font-bold text-gray-900 mb-6">AI Analysis</h3>
+              <h3 class="text-3xl font-bold text-gray-900 mb-6">Get Expert Insights</h3>
               <p class="text-gray-600 text-xl">Real-time performance insights</p>
             </div>
           </div>

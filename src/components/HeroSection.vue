@@ -17,7 +17,7 @@
             <h1 class="text-5xl sm:text-6xl lg:text-8xl font-bold text-white leading-tight">
               Elevate your 
               <span style="color: black;" class="font-extrabold">tennis</span> 
-              with AI
+              with Top Coaches
             </h1>
             <p class="text-2xl text-white leading-relaxed max-w-5xl">
               Professional coaching meets artificial intelligence for the ultimate tennis experience.

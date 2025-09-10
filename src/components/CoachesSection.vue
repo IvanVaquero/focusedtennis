@@ -3,16 +3,16 @@
     <div class="container-custom">
       <div class="text-center mb-20">
         <h2 class="text-5xl font-bold text-gray-900 mb-8">
-          World-class coaches
+          Transform your tennis with Elite Pro Insights
         </h2>
         <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-          Learn from ATP/WTA professionals
+          Learn directly from top coaches and apply world-class strategies to your game
         </p>
+        <!-- Join List button instead of images -->
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+      <!-- <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
         <div v-for="coach in coaches" :key="coach.id" class="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300">
-          <!-- Placeholder for coach image -->
           <div class="h-80 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
             <span class="text-8xl">{{ coach.emoji }}</span>
           </div>
@@ -25,7 +25,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </section>
 </template>
