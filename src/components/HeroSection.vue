@@ -1,5 +1,5 @@
 <template>
-  <section id="home" class="min-h-screen flex items-center relative pt-20 border-b-4 border-white">
+  <section id="home" class="min-h-screen flex items-center relative pt-20">
     <!-- Background Image -->
     <div
       class="absolute inset-0 bg-cover"

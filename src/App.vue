@@ -5,7 +5,7 @@
       <HeroSection />
       <BenefitsSection />
       <HowItWorksSection />
-      <CoachesSection />
+      <!-- <CoachesSection /> -->
       <!-- <AISection /> -->
       <!-- <TestimonialsSection /> -->
       <!-- <FAQSection /> -->
@@ -22,7 +22,7 @@ import AppFooter from './components/AppFooter.vue'
 import HeroSection from './components/HeroSection.vue'
 import BenefitsSection from './components/BenefitsSection.vue'
 import HowItWorksSection from './components/HowItWorksSection.vue'
-import CoachesSection from './components/CoachesSection.vue'
+// import CoachesSection from './components/CoachesSection.vue'
 // import AISection from './components/AISection.vue'
 // import TestimonialsSection from './components/TestimonialsSection.vue'
 // import FAQSection from './components/FAQSection.vue'

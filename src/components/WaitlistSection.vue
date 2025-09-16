@@ -1,13 +1,13 @@
 <template>
-  <section id="waitlist" class="py-32 bg-cover bg-center bg-no-repeat relative" style="background-image: url('/src/assets/images/waitlistImg.JPG')">
+  <section id="waitlist" class="py-32 bg-cover bg-center bg-no-repeat relative image-waitlist" style="background-image: url('/src/assets/images/waitlistImg.JPG')">
     <!-- Overlay for better text readability -->
-    <div class="absolute inset-0 bg-black bg-opacity-60"></div>
+    <div class="absolute inset-0 bg-black bg-opacity-20"></div>
     <div class="container-custom relative z-10">
       <div class="text-center mb-20">
-        <h2 class="text-5xl font-bold text-white mb-8">
+        <h2 class="text-6xl font-bold text-black mb-8">
           Join the waitlist
         </h2>
-        <p class="text-xl text-gray-200 max-w-2xl mx-auto">
+        <p class="text-xl text-white max-w-2xl mx-auto">
           Be first to access FocusedTennis and get exclusive early-bird pricing
         </p>
       </div>
@@ -21,18 +21,19 @@
       </div>
 
       <div v-else class="max-w-2xl mx-auto relative z-10">
-        <div class="bg-white rounded-3xl p-12 shadow-xl">
+        <div class="bg-white bg-opacity-90 rounded-3xl p-12 shadow-xl">
           <form @submit.prevent="submitForm" class="space-y-8">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label class="block text-sm font-medium text-gray-700 mb-3">Name</label>
-                <input 
-                  v-model="form.name" 
-                  type="text" 
-                  required 
-                  class="w-full px-4 py-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent text-lg"
-                  placeholder="Your name"
-                >
+                <q-input
+                  v-model="form.name"
+                  label="Name"
+                  required
+                  outlined
+                  class="q-mb-md"
+                  bg-color="white"
+                  color="primary"
+                />
               </div>
 
               <div>
@@ -41,7 +42,7 @@
                   v-model="form.email" 
                   type="email" 
                   required 
-                  class="w-full px-4 py-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent text-lg"
+                  class="w-full px-4 py-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent text-lg bg-white bg-opacity-90"
                   placeholder="your@email.com"
                 >
               </div>
@@ -52,7 +53,7 @@
               <select 
                 v-model="form.level" 
                 required 
-                class="w-full px-4 py-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent text-lg"
+                class="w-full px-4 py-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent text-lg bg-white bg-opacity-90"
               >
                 <option value="">Select your level</option>
                 <option value="beginner">Beginner</option>
@@ -62,13 +63,18 @@
               </select>
             </div>
 
-            <button 
+            <q-btn 
               type="submit" 
-              :disabled="submitting"
-              class="w-full btn-primary text-xl py-5 rounded-xl"
+              :loading="submitting"
+              :disable="submitting"
+              class="w-full"
+              color="primary"
+              size="lg"
+              rounded
+              unelevated
             >
               {{ submitting ? 'Joining...' : 'Join waitlist' }}
-            </button>
+            </q-btn>
           </form>
         </div>
       </div>
@@ -101,3 +107,11 @@ const submitForm = async () => {
   submitting.value = false
 }
 </script>
+
+<style scoped>
+.image-waitlist {
+  background-position: 0% 3%;
+  background-size: 140%;
+  
+}
+</style>

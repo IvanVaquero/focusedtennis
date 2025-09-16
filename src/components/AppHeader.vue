@@ -1,61 +1,81 @@
 <template>
-  <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" :class="isScrolled ? 'bg-black shadow-lg' : 'bg-transparent'">
-    <nav class="container-custom py-4">
-      <div class="flex items-center justify-between">
-        <!-- Logo -->
-        <div class="flex items-center space-x-2">
-          <div class="w-10 h-10 bg-black rounded-lg flex items-center justify-center">
-            <span class="text-white font-bold text-lg">FT</span>
-          </div>
-          <span class="text-xl font-bold text-white">FocusedTennis</span>
+  <header class="header" :class="headerClasses">
+    <nav class="nav">
+      <div class="nav-container">
+        <!-- Logo and Text - Left -->
+        <div class="logo-section">
+          <img src="/src/assets/images/logo.png" alt="FocusedTennis Logo" class="logo">
+          <span class="brand-text">FocusedTennis</span>
         </div>
 
-        <!-- Navigation -->
-        <div class="hidden md:flex items-center space-x-8">
-          <a href="#home" class="text-white hover:text-primary-600 font-medium transition-colors">Home</a>
-          <a href="#services" class="text-white hover:text-primary-600 font-medium transition-colors">Services</a>
-          <a href="#coaches" class="text-white hover:text-primary-600 font-medium transition-colors">Coaches</a>
-          <a href="#how-it-works" class="text-white hover:text-primary-600 font-medium transition-colors">How it works</a>
-          <a href="#ai" class="text-white hover:text-primary-600 font-medium transition-colors">AI</a>
-          <a href="#faq" class="text-white hover:text-primary-600 font-medium transition-colors">FAQ</a>
+        <!-- Navigation - Center -->
+        <div class="nav-menu">
+          <a v-for="item in navItems" :key="item.href" :href="item.href" class="nav-link">
+            {{ item.label }}
+          </a>
         </div>
 
-        <!-- CTA -->
-        <button class="btn-primary hidden md:block" :class="isScrolled ? 'bg-white text-black': 'bg-black text-white'" @click="scrollTo('#waitlist')">
-          Join waitlist
-        </button>
-
-        <!-- Mobile menu button -->
-        <button class="md:hidden p-2" @click="mobileMenuOpen = !mobileMenuOpen">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-          </svg>
-        </button>
+        <!-- CTA and Mobile Menu - Right -->
+        <div class="nav-actions">
+          <q-btn 
+            class="cta-button" 
+            size="md"
+            unelevated
+            @click="scrollTo('#waitlist')"
+          >
+            Join waitlist
+          </q-btn>
+          <q-btn 
+            class="mobile-menu-btn" 
+            flat 
+            round 
+            icon="menu"
+            color="white"
+            @click="mobileMenuOpen = !mobileMenuOpen" 
+          />
+        </div>
       </div>
 
       <!-- Mobile menu -->
-      <div v-show="mobileMenuOpen" class="md:hidden mt-4 py-4 bg-white rounded-lg shadow-lg">
-        <div class="flex flex-col space-y-4">
-          <a href="#home" class="text-gray-700 hover:text-primary-600 font-medium px-4" @click="mobileMenuOpen = false">Home</a>
-          <a href="#services" class="text-gray-700 hover:text-primary-600 font-medium px-4" @click="mobileMenuOpen = false">Services</a>
-          <a href="#coaches" class="text-gray-700 hover:text-primary-600 font-medium px-4" @click="mobileMenuOpen = false">Coaches</a>
-          <a href="#how-it-works" class="text-gray-700 hover:text-primary-600 font-medium px-4" @click="mobileMenuOpen = false">How it works</a>
-          <a href="#ai" class="text-gray-700 hover:text-primary-600 font-medium px-4" @click="mobileMenuOpen = false">AI</a>
-          <a href="#faq" class="text-gray-700 hover:text-primary-600 font-medium px-4" @click="mobileMenuOpen = false">FAQ</a>
-          <button class="btn-primary mx-4" @click="scrollTo('#waitlist'); mobileMenuOpen = false">
+      <q-slide-transition>
+        <div v-show="mobileMenuOpen" class="mobile-menu">
+          <a v-for="item in navItems" :key="item.href" :href="item.href" class="mobile-nav-link" @click="mobileMenuOpen = false">
+            {{ item.label }}
+          </a>
+          <q-btn 
+            class="mobile-cta-button" 
+            color="primary" 
+            size="md"
+            rounded
+            unelevated
+            @click="scrollTo('#waitlist'); mobileMenuOpen = false"
+          >
             Join waitlist
-          </button>
+          </q-btn>
         </div>
-      </div>
+      </q-slide-transition>
     </nav>
   </header>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 
 const isScrolled = ref(false)
 const mobileMenuOpen = ref(false)
+
+const navItems = [
+  { href: '#home', label: 'Home' },
+  { href: '#benefits', label: 'Benefits' },
+  { href: '#coaches', label: 'Coaches' },
+  { href: '#how-it-works', label: 'How it works' },
+  { href: '#ai', label: 'AI' },
+  { href: '#faq', label: 'FAQ' }
+]
+
+const headerClasses = computed(() => ({
+  'header--scrolled': isScrolled.value
+}))
 
 const handleScroll = () => {
   isScrolled.value = window.scrollY > 50
@@ -76,3 +96,90 @@ onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll)
 })
 </script>
+
+<style scoped>
+/* Header Base Styles */
+.header {
+  @apply fixed top-0 left-0 right-0 z-50 transition-all duration-300;
+}
+
+.header--scrolled {
+  background: rgba(0, 0, 0, 0.95);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* Navigation Container */
+.nav {
+  @apply container-custom py-4;
+}
+
+.nav-container {
+  @apply flex items-center justify-between w-full;
+}
+
+/* Logo Section */
+.logo-section {
+  @apply flex items-center space-x-3;
+}
+
+.logo {
+  @apply w-10 h-10 object-contain;
+}
+
+.brand-text {
+  @apply text-xl font-bold text-white drop-shadow-lg;
+}
+
+/* Navigation Menu */
+.nav-menu {
+  @apply hidden lg:flex items-center space-x-6 flex-1 justify-center;
+}
+
+.nav-link {
+  @apply text-white hover:text-primary-400 font-medium transition-colors drop-shadow-md px-4 py-2 rounded-lg hover:bg-white/10 text-sm;
+}
+
+/* Navigation Actions */
+.nav-actions {
+  @apply flex items-center space-x-4;
+}
+
+.cta-button {
+  @apply hidden lg:block;
+  background-color: black;
+  color: #ffffff;
+  padding: 5px 20px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+  background-color: #2c5a9f;
+}
+
+.header--scrolled .cta-button {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.header--scrolled .cta-button:hover {
+  background-color: #2c5a9f;
+}
+
+.mobile-menu-btn {
+  @apply lg:hidden;
+}
+
+/* Mobile Menu */
+.mobile-menu {
+  @apply lg:hidden mt-4 py-4 bg-white/95 backdrop-blur-md rounded-lg shadow-xl;
+}
+
+.mobile-nav-link {
+  @apply text-gray-700 hover:text-primary-600 font-medium px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors block;
+}
+
+.mobile-cta-button {
+  @apply mx-4 mt-2;
+}
+</style>

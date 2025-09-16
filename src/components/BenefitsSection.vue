@@ -1,5 +1,5 @@
 <template>
-  <section id="services" class="h-[80vh] bg-white border-b-4 border-black">
+  <section id="services" class="h-[80vh] bg-white">
     <div class="h-full flex">
       <div class="grid grid-cols-1 md:grid-cols-3 w-full">
         <!-- TODO - Mental + Tactical + Mentorship -->
@@ -8,23 +8,23 @@
           <div class="relative h-full overflow-hidden">
             <!-- Background Image with Blur -->
             <div 
-              class="absolute inset-0 bg-cover bg-center bg-no-repeat transform group-hover:scale-105 transition-transform duration-500"
-              style="background-image: url('/src/assets/images/technique2.jpg');"
+              class="absolute inset-0 bg-cover bg-no-repeat transform group-hover:scale-105 transition-transform duration-500"
+              style="background-image: url('/src/assets/images/technique.jpg');"
             ></div>
             
             <!-- Dark Overlay -->
-            <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300"></div>
+            <div class="absolute inset-0 bg-black/25 group-hover:bg-black/50 transition-colors duration-300"></div>
             
             <!-- Content Overlay -->
             <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-8">
-              <h3 class="text-3xl font-bold text-white mb-4 group-hover:text-yellow-300 transition-colors duration-300">Tactics</h3>
-              <p class="text-white/90 text-lg leading-relaxed">Perfect your strokes with AI-powered analysis</p>
+              <h2 class="text-7xl font-bold text-black mb-4 group-hover:text-primary-300 transition-colors duration-300">Tactics</h2>
+              <p class="text-white text-xl leading-relaxed">Perfect your strokes with AI-powered analysis</p>
             </div>
           </div>
         </div>
 
         <!-- Strategy Column -->
-        <div class="relative group cursor-pointer h-full border-r-4 border-white border-l-4 border-white">
+        <div class="relative group cursor-pointer h-full">
           <div class="relative h-full overflow-hidden">
             <!-- Background Image with Blur -->
             <div 
@@ -33,12 +33,12 @@
             ></div>
             
             <!-- Dark Overlay -->
-            <div class="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors duration-300"></div>
+            <div class="absolute inset-0 bg-black/25 group-hover:bg-black/50 transition-colors duration-300"></div>
             
             <!-- Content Overlay -->
             <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-8">
-              <h3 class="text-3xl font-bold text-white mb-4 group-hover:text-yellow-300 transition-colors duration-300">Mental Game</h3>
-              <p class="text-white/90 text-lg leading-relaxed">Develop winning game plans and tactics</p>
+              <h2 class="text-7xl font-bold text-black mb-4 group-hover:text-primary-300 transition-colors duration-300">Mental</h2>
+              <p class="text-white text-xl leading-relaxed">Develop winning game plans and tactics</p>
             </div>
           </div>
         </div>
@@ -53,12 +53,12 @@
             ></div>
             
             <!-- Dark Overlay -->
-            <div class="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors duration-300"></div>
+            <div class="absolute inset-0 bg-black/25 group-hover:bg-black/50 transition-colors duration-300"></div>
             
             <!-- Content Overlay -->
             <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-8">
-              <h3 class="text-3xl font-bold text-white mb-4 group-hover:text-yellow-300 transition-colors duration-300">Mentorship</h3>
-              <p class="text-white/90 text-lg leading-relaxed">Build confidence and competitive mindset</p>
+              <h2 class="text-7xl font-bold text-black mb-4 group-hover:text-primary-300 transition-colors duration-300">Mentorship</h2>
+              <p class="text-white text-xl leading-relaxed">Build confidence and competitive mindset</p>
             </div>
           </div>
         </div>
