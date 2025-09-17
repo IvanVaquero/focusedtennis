@@ -145,7 +145,7 @@ onUnmounted(() => {
 }
 
 .cta-button {
-  @apply hidden lg:block;
+  @apply hidden rounded-md lg:block ;
   background-color: black;
   color: #ffffff;
   padding: 5px 20px;
