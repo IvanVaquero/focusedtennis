@@ -17,7 +17,7 @@
               with Top Coaches
             </h1>
             <p class="hero-subtitle">
-              Professional coaching meets artificial intelligence for the ultimate tennis experience.
+              Learn Elite Pro Insights from top coaches and apply world-class strategies to your game
             </p>
           </div>
 
@@ -106,7 +106,7 @@ const scrollTo = (selector: string) => {
 }
 
 .btn-primary-hero:hover {
-  background-color: #2c5a9f;
+  background-color: #2563eb;
 }
 
 .btn-secondary-hero {

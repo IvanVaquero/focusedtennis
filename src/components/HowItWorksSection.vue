@@ -55,13 +55,13 @@ const steps = [
     id: 1,
     icon: 'person_add',
     title: 'Book a Pro Coach',
-    description: 'Connect with certified professionals who understand your unique playing style and goals.'
+    description: 'Connect with certified professionals who are aligned with your playing style and goals.'
   },
   {
     id: 2,
     icon: 'insights',
     title: 'Get Expert Insights',
-    description: 'Receive real-time performance analysis and personalized feedback during every session.'
+    description: 'Receive real-time tennis insights and personalized feedback during every session.'
   },
   {
     id: 3,
@@ -138,15 +138,26 @@ const stepIconSize = computed(() => {
   @apply mb-6 relative;
 }
 
+.step-avatar {
+  background: white;
+  color: black;
+  box-shadow: 
+    0 15px 30px rgba(0, 0, 0, 0.3),
+    0 0 0 3px rgba(255, 255, 255, 0.2);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 .step-info {
   @apply relative;
 }
 
 .step-number {
   @apply absolute -top-8 left-1/2 transform -translate-x-1/2 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold;
-  background: rgba(0, 0, 0, 1);
+  background: black;
   color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
   z-index: 2;
+  transition: all 0.3s ease;
 }
 
 .step-title {

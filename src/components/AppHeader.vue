@@ -67,10 +67,7 @@ const mobileMenuOpen = ref(false)
 const navItems = [
   { href: '#home', label: 'Home' },
   { href: '#benefits', label: 'Benefits' },
-  { href: '#coaches', label: 'Coaches' },
-  { href: '#how-it-works', label: 'How it works' },
-  { href: '#ai', label: 'AI' },
-  { href: '#faq', label: 'FAQ' }
+  { href: '#how-it-works', label: 'How it works' }
 ]
 
 const headerClasses = computed(() => ({
@@ -136,7 +133,7 @@ onUnmounted(() => {
 }
 
 .nav-link {
-  @apply text-white hover:text-primary-400 font-medium transition-colors drop-shadow-md px-4 py-2 rounded-lg hover:bg-white/10 text-sm;
+  @apply text-white hover:text-blue-400 font-medium transition-colors drop-shadow-md px-4 py-2 rounded-lg hover:bg-white/10 text-sm;
 }
 
 /* Navigation Actions */

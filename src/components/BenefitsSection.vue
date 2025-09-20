@@ -77,7 +77,7 @@ const scrollTo = (selector: string) => {
 }
 
 .benefit-card:hover .benefit-title {
-  @apply text-primary-300;
+  @apply text-blue-500;
 }
 
 .benefit-image {
@@ -118,4 +118,5 @@ const scrollTo = (selector: string) => {
   background-image: url('/src/assets/images/mental.png');
   background-position: center;
 }
+
 </style>

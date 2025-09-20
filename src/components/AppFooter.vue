@@ -2,58 +2,67 @@
   <footer class="app-footer">
     <div class="footer-container">
       <div class="footer-content">
-        <!-- Brand Section -->
-        <div class="brand-section">
-          <div class="brand-logo">
-            <q-avatar size="3rem" color="white" text-color="black" class="brand-avatar">
-              <span class="brand-initials">FT</span>
-            </q-avatar>
-            <span class="brand-name">FocusedTennis</span>
-          </div>
-          <p class="brand-description">
-            Elevate your tennis with professional coaching and AI-powered insights.
-          </p>
-          <div class="social-section">
-            <q-btn 
-              round 
-              flat 
-              icon="mdi-instagram" 
-              size="md"
-              color="grey-5"
-              class="social-btn"
-              href="https://instagram.com/focusedtennis"
-              target="_blank"
-              aria-label="Follow us on Instagram"
-            />
+        <!-- Left Side: Brand Section -->
+        <div class="footer-left">
+          <div class="brand-section">
+            <div class="brand-logo">
+              <q-avatar size="2.5rem" color="white" text-color="black" class="brand-avatar">
+                <span class="brand-initials">FT</span>
+              </q-avatar>
+              <span class="brand-name">FocusedTennis</span>
+            </div>
+            <p class="brand-description">
+              Elevate your tennis with professional coaching and AI-powered insights.
+            </p>
           </div>
         </div>
 
-        <!-- Quick Links -->
-        <div class="links-section">
-          <h3 class="section-title">Quick Links</h3>
-          <div class="links-list">
-            <q-btn 
-              v-for="link in quickLinks" 
-              :key="link.label"
-              flat 
-              no-caps
-              :href="link.href"
-              class="footer-link"
-            >
-              {{ link.label }}
-            </q-btn>
+        <!-- Right Side: Quick Links & Contact -->
+        <div class="footer-right">
+          <!-- Quick Links -->
+          <div class="links-section">
+            <h3 class="section-title">Quick Links</h3>
+            <div class="links-list">
+              <q-btn 
+                v-for="link in quickLinks" 
+                :key="link.label"
+                flat 
+                no-caps
+                :href="link.href"
+                class="footer-link"
+              >
+                {{ link.label }}
+              </q-btn>
+            </div>
           </div>
-        </div>
 
-        <!-- Contact -->
-        <div class="contact-section">
-          <h3 class="section-title">Contact</h3>
-          <div class="contact-info">
-            <div class="contact-item">
-              <q-icon name="email" class="contact-icon" />
-              <a href="mailto:hello@focusedtennis.com" class="contact-link">
-                hello@focusedtennis.com
-              </a>
+          <!-- Contact & Social -->
+          <div class="contact-section">
+            <h3 class="section-title">Contact</h3>
+            <div class="contact-info">
+              <div class="contact-item">
+                <q-icon name="email" class="contact-icon" />
+                <a href="mailto:hello@focusedtennis.com" class="contact-link">
+                  hello@focusedtennis.com
+                </a>
+              </div>
+              <div class="social-cta">
+                <div class="contact-item">
+                  <img 
+                    src="/src/assets/images/instagram.png" 
+                    alt="Instagram" 
+                    class="instagram-icon"
+                  />
+                  <a 
+                    href="https://instagram.com/focusedtennis"
+                    target="_blank"
+                    class="contact-link"
+                    aria-label="Follow us on Instagram"
+                  >
+                    Follow us on Instagram
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -65,7 +74,6 @@
         <span class="copyright">
           © {{ currentYear }} FocusedTennis. All rights reserved.
         </span>
-        <span class="tagline">Made with ❤️ for tennis players</span>
       </div>
     </div>
   </footer>
@@ -90,20 +98,29 @@ const quickLinks = [
 }
 
 .footer-container {
-  @apply container-custom py-16;
+  @apply container-custom py-8;
 }
 
 .footer-content {
-  @apply grid grid-cols-1 md:grid-cols-3 gap-12 mb-12;
+  @apply flex flex-col md:flex-row justify-between items-start gap-16 mb-8;
+}
+
+/* Footer Layout */
+.footer-left {
+  @apply flex-1;
+}
+
+.footer-right {
+  @apply flex gap-16;
 }
 
 /* Brand Section */
 .brand-section {
-  @apply space-y-6;
+  @apply space-y-4;
 }
 
 .brand-logo {
-  @apply flex items-center gap-4;
+  @apply flex items-center gap-3;
 }
 
 .brand-avatar {
@@ -111,19 +128,64 @@ const quickLinks = [
 }
 
 .brand-initials {
-  @apply font-bold text-xl;
+  @apply font-bold text-lg;
 }
 
 .brand-name {
-  @apply text-2xl font-bold;
+  @apply text-xl font-bold;
 }
 
 .brand-description {
-  @apply text-gray-300 leading-relaxed max-w-sm;
+  @apply text-gray-300 leading-relaxed max-w-xs text-sm;
 }
 
-.social-section {
-  @apply flex gap-3;
+/* Links Section */
+.links-section {
+  @apply space-y-3;
+}
+
+.section-title {
+  @apply text-lg font-semibold mb-3;
+}
+
+.links-list {
+  @apply flex flex-col gap-1;
+}
+
+.footer-link {
+  @apply justify-start text-gray-300 hover:text-white transition-colors duration-300 text-sm;
+  text-transform: none;
+  padding-left: 0;
+}
+
+/* Contact Section */
+.contact-section {
+  @apply space-y-3;
+}
+
+.contact-info {
+  @apply space-y-4;
+}
+
+.contact-item {
+  @apply flex items-center gap-3;
+}
+
+.contact-icon {
+  @apply text-white text-lg;
+}
+
+.contact-link {
+  @apply text-gray-300 hover:text-white transition-colors duration-300 text-sm;
+}
+
+/* Social CTA */
+.social-cta {
+  @apply mt-4;
+}
+
+.social-item {
+  @apply flex items-center gap-3;
 }
 
 .social-btn {
@@ -132,47 +194,15 @@ const quickLinks = [
 
 .social-btn:hover {
   @apply scale-110;
-  color: #E1306C !important;
 }
 
-/* Links Section */
-.links-section {
-  @apply space-y-4;
+.instagram-icon {
+  @apply w-5 h-5 object-contain;
+  transition: all 0.3s ease;
 }
 
-.section-title {
-  @apply text-xl font-semibold mb-4;
-}
-
-.links-list {
-  @apply flex flex-col gap-1;
-}
-
-.footer-link {
-  @apply justify-start text-gray-300 hover:text-white transition-colors duration-300;
-  text-transform: none;
-  padding-left: 0;
-}
-
-/* Contact Section */
-.contact-section {
-  @apply space-y-4;
-}
-
-.contact-info {
-  @apply space-y-3;
-}
-
-.contact-item {
-  @apply flex items-center gap-3;
-}
-
-.contact-icon {
-  @apply text-blue-500 text-xl;
-}
-
-.contact-link {
-  @apply text-gray-300 hover:text-white transition-colors duration-300;
+.social-text {
+  @apply text-gray-300 text-sm;
 }
 
 /* Footer Bottom */
@@ -181,21 +211,25 @@ const quickLinks = [
 }
 
 .footer-bottom {
-  @apply flex flex-col md:flex-row justify-between items-center gap-4 pt-8;
+  @apply flex flex-col items-start justify-start gap-2 pt-6 text-left;
 }
 
 .copyright {
-  @apply text-gray-400 text-sm;
+  @apply text-gray-400 text-xs;
 }
 
 .tagline {
-  @apply text-gray-400 text-sm;
+  @apply text-gray-400 text-xs;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
   .footer-content {
-    @apply grid-cols-1 gap-8;
+    @apply flex-col gap-12;
+  }
+  
+  .footer-right {
+    @apply flex-col gap-8;
   }
   
   .brand-logo {
@@ -203,11 +237,11 @@ const quickLinks = [
   }
   
   .brand-name {
-    @apply text-xl;
+    @apply text-lg;
   }
   
-  .footer-bottom {
-    @apply text-center;
+  .social-item {
+    @apply justify-start;
   }
 }
 </style>
