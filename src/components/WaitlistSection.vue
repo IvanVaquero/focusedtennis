@@ -202,7 +202,7 @@
 
 <script setup lang="ts">
 import { ref, reactive, computed } from 'vue'
-import { checkEmail, joinWaitlist } from '../config/api'
+import { checkEmail, joinWaitlist } from '../config/api.js'
 
 const submitting = ref(false)
 const showStepper = ref(false)
