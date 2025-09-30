@@ -3,12 +3,12 @@
 
 export const config = {
   // API Configuration
-  API_BASE: import.meta.env.VITE_API_BASE || 'http://localhost:8000',
+  API_BASE: import.meta.env.VITE_API_BASE || 'https://fctennispro.com/php',
   ADMIN_TOKEN: import.meta.env.VITE_ADMIN_TOKEN || '9f2a7b4c5d8e10a3b6c9d2e4f7a1b3c59d7e4f2a1c0b8d7e6f5a4c3b2d1e0f9',
 
   // Brand Configuration
   BRAND_NAME: import.meta.env.VITE_BRAND_NAME || 'FocusedTennis',
-  WEBSITE_URL: import.meta.env.VITE_WEBSITE_URL || 'https://focusedtennis.com',
+  WEBSITE_URL: import.meta.env.VITE_WEBSITE_URL || 'https://fctennispro.com',
   INSTAGRAM_URL: import.meta.env.VITE_INSTAGRAM_URL || 'https://instagram.com/focusedtennis',
 
   // Colors

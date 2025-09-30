@@ -6,13 +6,11 @@
         <div class="footer-left">
           <div class="brand-section">
             <div class="brand-logo">
-              <q-avatar size="2.5rem" color="white" text-color="black" class="brand-avatar">
-                <span class="brand-initials">FT</span>
-              </q-avatar>
+              <img :src="logoImage" alt="FocusedTennis Logo" class="logo">
               <span class="brand-name">FocusedTennis</span>
             </div>
             <p class="brand-description">
-              Elevate your tennis with professional coaching and AI-powered insights.
+              Learn Elite Pro Insights from top coaches and apply world-class strategies to your game.
             </p>
           </div>
         </div>
@@ -42,14 +40,14 @@
             <div class="contact-info">
               <div class="contact-item">
                 <q-icon name="email" class="contact-icon" />
-                <a href="mailto:hello@focusedtennis.com" class="contact-link">
-                  hello@focusedtennis.com
+                <a href="mailto:info@fctennispro.com" class="contact-link">
+                  info@fctennispro.com
                 </a>
               </div>
               <div class="social-cta">
                 <div class="contact-item">
                   <img 
-                    src="/src/assets/images/instagram.png" 
+                    :src="instagramIcon" 
                     alt="Instagram" 
                     class="instagram-icon"
                   />
@@ -81,6 +79,8 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import instagramIcon from '../assets/images/instagram.png'
+import logoImage from '../assets/images/logo.png'
 
 const currentYear = computed(() => new Date().getFullYear())
 
@@ -95,6 +95,10 @@ const quickLinks = [
 /* Footer Base */
 .app-footer {
   @apply bg-black text-white;
+}
+
+.logo {
+  @apply w-10 h-10 object-contain;
 }
 
 .footer-container {

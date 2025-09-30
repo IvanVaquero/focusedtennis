@@ -54,7 +54,7 @@ const scrollTo = (selector: string) => {
 /* Background */
 .hero-background {
   @apply absolute inset-0 bg-cover;
-  background-image: url('/src/assets/images/heroImage2.JPG');
+  background-image: url('../assets/images/heroImage2.JPG');
   background-position: 70% center;
 }
 

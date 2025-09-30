@@ -31,30 +31,31 @@
 </template>
 
 <script setup lang="ts">
-const coaches = [
-  {
-    id: 1,
-    name: 'Maria Gonzalez',
-    title: 'Technique Specialist',
-    emoji: '👩‍🏫',
-    experience: '15+',
-    students: '200+'
-  },
-  {
-    id: 2,
-    name: 'Carlos Rodriguez',
-    title: 'Strategy Expert',
-    emoji: '👨‍🏫',
-    experience: '12+',
-    students: '150+'
-  },
-  {
-    id: 3,
-    name: 'Ana Martinez',
-    title: 'Mental Coach',
-    emoji: '👩‍⚕️',
-    experience: '10+',
-    students: '180+'
-  }
-]
+// Coaches data (currently unused but kept for future use)
+// const coaches = [
+//   {
+//     id: 1,
+//     name: 'Maria Gonzalez',
+//     title: 'Technique Specialist',
+//     emoji: '👩‍🏫',
+//     experience: '15+',
+//     students: '200+'
+//   },
+//   {
+//     id: 2,
+//     name: 'Carlos Rodriguez',
+//     title: 'Strategy Expert',
+//     emoji: '👨‍🏫',
+//     experience: '12+',
+//     students: '150+'
+//   },
+//   {
+//     id: 3,
+//     name: 'Ana Martinez',
+//     title: 'Mental Coach',
+//     emoji: '👩‍⚕️',
+//     experience: '10+',
+//     students: '180+'
+//   }
+// ]
 </script>

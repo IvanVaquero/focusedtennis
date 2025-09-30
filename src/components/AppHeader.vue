@@ -4,7 +4,7 @@
       <div class="nav-container">
         <!-- Logo and Text - Left -->
         <div class="logo-section">
-          <img src="/src/assets/images/logo.png" alt="FocusedTennis Logo" class="logo">
+          <img :src="logoImage" alt="FocusedTennis Logo" class="logo">
           <span class="brand-text">FocusedTennis</span>
         </div>
 
@@ -60,6 +60,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'
+import logoImage from '../assets/images/logo.png'
 
 const isScrolled = ref(false)
 const mobileMenuOpen = ref(false)

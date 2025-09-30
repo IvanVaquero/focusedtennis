@@ -37,10 +37,9 @@
             <h4 class="chart-title">Practice Frequency</h4>
             <div class="frequency-chart">
               <div 
-                v-for="(data, freq) in analytics.practiceFrequency" 
+                v-for="(data, freq) in filteredPracticeFrequency" 
                 :key="`practice-${freq}`"
                 class="frequency-bar"
-                v-if="freq !== 'unknown'"
               >
                 <div class="bar-label">{{ freq }} times/week</div>
                 <div class="bar-container">
@@ -58,10 +57,9 @@
             <h4 class="chart-title">Match Frequency</h4>
             <div class="frequency-chart">
               <div 
-                v-for="(data, freq) in analytics.matchFrequency" 
+                v-for="(data, freq) in filteredMatchFrequency" 
                 :key="`match-${freq}`"
                 class="frequency-bar"
-                v-if="freq !== 'unknown'"
               >
                 <div class="bar-label">{{ freq }} times/week</div>
                 <div class="bar-container">
@@ -250,9 +248,9 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
-import { getWaitlistEntries, getWaitlistAnalytics } from '../config/api.js'
+import { getWaitlistEntries, getWaitlistAnalytics, type WaitlistEntry, type WaitlistAnalytics } from '../config/api.js'
 import { config, validateConfig } from '../config/env.js'
 
 const API_BASE    = config.API_BASE
@@ -265,18 +263,64 @@ onMounted(() => {
 
 const showClearDialog = ref(false)
 const loading = ref(false)
-const analytics = ref({})
+const analytics = ref<WaitlistAnalytics>({
+  totalCount: 0,
+  emailSentCount: 0,
+  pendingCount: 0,
+  priorityAccessCount: 0,
+  lastUpdated: null,
+  recentEntries: [],
+  byExperienceLevel: {},
+  byFinancialGoals: {},
+  completionRate: 0,
+  avgPracticeFreq: 0,
+  topStruggle: '',
+  practiceFrequency: {},
+  matchFrequency: {},
+  strugglesKeywords: [],
+  expectationsKeywords: []
+})
 
-const waitlistData = ref({ entries: [], lastUpdated: null, totalCount: 0 })
+const waitlistData = ref<{ entries: WaitlistEntry[], lastUpdated: string | null, totalCount: number }>({ 
+  entries: [], 
+  lastUpdated: null, 
+  totalCount: 0 
+})
 const stats = ref({
   totalCount: 0, 
   emailSentCount: 0, 
   pendingCount: 0, 
   priorityAccessCount: 0,
-  lastUpdated: null, 
-  recentEntries: [],
-  byExperienceLevel: {}, 
-  byFinancialGoals: {}
+  lastUpdated: null as string | null, 
+  recentEntries: [] as WaitlistEntry[],
+  byExperienceLevel: {} as Record<string, number>, 
+  byFinancialGoals: {} as Record<string, number>,
+  completionRate: 0,
+  avgPracticeFreq: 0,
+  topStruggle: ''
+})
+
+// Computed properties to filter out 'unknown' values
+const filteredPracticeFrequency = computed(() => {
+  if (!analytics.value.practiceFrequency) return {}
+  const filtered: Record<string, { count: number; percentage: number }> = {}
+  Object.entries(analytics.value.practiceFrequency).forEach(([freq, data]) => {
+    if (freq !== 'unknown') {
+      filtered[freq] = data
+    }
+  })
+  return filtered
+})
+
+const filteredMatchFrequency = computed(() => {
+  if (!analytics.value.matchFrequency) return {}
+  const filtered: Record<string, { count: number; percentage: number }> = {}
+  Object.entries(analytics.value.matchFrequency).forEach(([freq, data]) => {
+    if (freq !== 'unknown') {
+      filtered[freq] = data
+    }
+  })
+  return filtered
 })
 
 async function apiList() {
@@ -287,7 +331,7 @@ async function apiList() {
   if (!res.ok) throw new Error(data?.error || 'List failed')
   return data
 }
-async function apiMarkSent(id) {
+async function apiMarkSent(id: string) {
   const res = await fetch(`${API_BASE}/api/waitlist-mark-sent.php`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'X-Admin-Token': ADMIN_TOKEN },
@@ -306,7 +350,7 @@ async function apiClear() {
   if (!res.ok || !data?.ok) throw new Error(data?.error || 'Clear failed')
   return data
 }
-async function apiImport(entries) {
+async function apiImport(entries: WaitlistEntry[]) {
   const res = await fetch(`${API_BASE}/api/waitlist-import.php`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'X-Admin-Token': ADMIN_TOKEN },
@@ -319,12 +363,12 @@ async function apiImport(entries) {
 
 function calculateStats() {
   const entries = waitlistData.value.entries || []
-  const byExp = {}, byGoals = {}
+  const byExp: Record<string, number> = {}, byGoals: Record<string, number> = {}
   
   entries.forEach(e => {
     const lvl = e.experienceLevel || 'Not specified'
     byExp[lvl] = (byExp[lvl] || 0) + 1
-    ;(e.financialGoals || []).forEach(g => { byGoals[g] = (byGoals[g] || 0) + 1 })
+    ;(e.financialGoals || []).forEach((g: string) => { byGoals[g] = (byGoals[g] || 0) + 1 })
   })
   
   // Calculate email sent count based on status or emailSent field
@@ -340,9 +384,12 @@ function calculateStats() {
     pendingCount: entries.length - emailSentCount,
     priorityAccessCount: entries.filter(e => e.priorityAccess === true).length,
     lastUpdated: waitlistData.value.lastUpdated,
-    recentEntries: [...entries].sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt)).slice(0,10),
+    recentEntries: [...entries].sort((a,b)=>new Date(b.createdAt).getTime()-new Date(a.createdAt).getTime()).slice(0,10),
     byExperienceLevel: byExp,
-    byFinancialGoals: byGoals
+    byFinancialGoals: byGoals,
+    completionRate: analytics.value.completionRate || 0,
+    avgPracticeFreq: analytics.value.avgPracticeFreq || 0,
+    topStruggle: analytics.value.topStruggle || ''
   }
 }
 
@@ -355,8 +402,8 @@ const refreshData = async () => {
       getWaitlistAnalytics()
     ])
     
-    waitlistData.value = data
-    analytics.value = analyticsData
+    waitlistData.value = Array.isArray(data.data) ? { entries: data.data, lastUpdated: null, totalCount: data.data.length } : data.data || { entries: [], lastUpdated: null, totalCount: 0 }
+    analytics.value = analyticsData.data || analytics.value
     calculateStats()
   } catch (e) {
     console.error(e)
@@ -373,7 +420,7 @@ const refreshData = async () => {
   }
 }
 
-const markEmailAsSent = async (entryId) => {
+const markEmailAsSent = async (entryId: string) => {
   try {
     await apiMarkSent(entryId)
     await refreshData()
@@ -394,7 +441,7 @@ const clearAllData = async () => {
   }
 }
 
-const formatDate = (dateString) => {
+const formatDate = (dateString: string) => {
   if (!dateString) return 'N/A'
   return new Date(dateString).toLocaleDateString('en-US', {
     year: 'numeric',
@@ -405,7 +452,7 @@ const formatDate = (dateString) => {
   })
 }
 
-const exportData = (format) => {
+const exportData = (format: string) => {
   const entries = waitlistData.value.entries || []
   if (format === 'json') {
     const blob = new Blob([JSON.stringify(waitlistData.value, null, 2)], { type:'application/json' })
@@ -440,8 +487,8 @@ const exportData = (format) => {
 
 const importData = () => {
   const input = document.createElement('input'); input.type = 'file'; input.accept = '.json'
-  input.onchange = async (e)=>{
-    const file = e.target.files?.[0]; if (!file) return
+  input.onchange = async (e: Event)=>{
+    const file = (e.target as HTMLInputElement)?.files?.[0]; if (!file) return
     const text = await file.text()
     try {
       const json = JSON.parse(text)

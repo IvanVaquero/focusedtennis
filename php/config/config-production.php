@@ -1,19 +1,18 @@
 <?php
-// FocusedTennis Configuration
+// FocusedTennis Production Configuration for Hostinger
 define('ADMIN_TOKEN', '9f2a7b4c5d8e10a3b6c9d2e4f7a1b3c59d7e4f2a1c0b8d7e6f5a4c3b2d1e0f9');
 
-// Storage paths
+// Storage paths - adjust for Hostinger
 define('BASE_DIR',       __DIR__ . '/../storage');
 define('VERIFIED_FILE',  BASE_DIR . '/waitlist-verified.jsonl');
 
-// Allowed origins for CORS
+// Allowed origins for CORS - add your production domains
 $ALLOWED_ORIGINS = [
-  'http://localhost:5173',
-  'http://localhost:5174',
-  'http://127.0.0.1:5173',
-  'http://127.0.0.1:5174',
   'https://fctennispro.com',
-  'https://www.fctennispro.com'
+  'https://www.fctennispro.com',
+  // Keep localhost for testing
+  'http://localhost:5173',
+  'http://127.0.0.1:5174'
 ];
 
 // Helper you can reuse in all endpoints

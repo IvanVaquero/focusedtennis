@@ -87,7 +87,7 @@ const stepIconSize = computed(() => {
 
 .how-it-works-background {
   @apply absolute inset-0 bg-cover bg-center bg-no-repeat;
-  background-image: url('/src/assets/images/steps.JPG');
+  background-image: url('../assets/images/steps.JPG');
   background-position: 100% 3%;
   background-size: cover;
 }

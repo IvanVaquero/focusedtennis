@@ -91,7 +91,7 @@
                     class="accept-checkbox"
                   />
                   <label class="checkbox-label" @click="form.acceptTerms = !form.acceptTerms">
-                    I agree to receive updates about <span class="brand-highlight">FocusedTennis</span> and accept the terms of service
+                    <span class="brand-highlight">Apply for Priority Access</span> (We have a few more questions to improve our upcoming platform features)
                   </label>
                 </div>
               </div>
@@ -274,7 +274,7 @@ const onSubmitBasicInfo = async () => {
     // Check if email already exists
     const emailCheck = await checkEmail(form.email)
     
-    if (emailCheck.exists) {
+    if (emailCheck.data) {
       alert('This email is already on the waitlist!')
       submitting.value = false
       return
@@ -330,7 +330,7 @@ const onSubmitComplete = async () => {
     localStorage.setItem('focusedtennis_waitlist', JSON.stringify({
       ...form,
       submittedAt: new Date().toISOString(),
-      id: response.id
+      id: response.data?.id || 'temp-id'
     }))
     
   } catch (error) {
@@ -361,7 +361,7 @@ const resetForm = () => {
 /* Waitlist Section Base */
 .waitlist-section {
   @apply py-32 bg-cover bg-center bg-no-repeat relative;
-  background-image: url('/src/assets/images/waitlistImg.JPG');
+  background-image: url('../assets/images/waitlistImg.JPG');
   background-position: 0% 3%;
   background-size: 140%;
 }

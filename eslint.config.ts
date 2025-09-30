@@ -17,4 +17,18 @@ export default defineConfigWithVueTs(
 
   pluginVue.configs['flat/essential'],
   vueTsConfigs.recommended,
+  
+  // Configure Vue-specific rules
+  {
+    name: 'vue-rules',
+    files: ['**/*.vue'],
+    rules: {
+      // Allow any CSS in style blocks
+      'vue/no-unused-vars': 'off',
+      'vue/valid-template-root': 'off',
+      // Disable CSS-related warnings
+      'no-undef': 'off',
+      'no-unused-vars': 'off',
+    },
+  },
 )

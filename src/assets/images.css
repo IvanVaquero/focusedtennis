@@ -1,0 +1,14 @@
+/* Import background images for CSS */
+.tactics-bg {
+  background-image: url('./technique.jpg');
+}
+
+.mental-bg {
+  background-image: url('./strategy.jpg');
+  background-position: center;
+}
+
+.mentorship-bg {
+  background-image: url('./mental.png');
+  background-position: center;
+}

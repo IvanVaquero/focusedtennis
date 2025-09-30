@@ -18,4 +18,9 @@ import HeroSection from '../components/HeroSection.vue'
 import BenefitsSection from '../components/BenefitsSection.vue'
 import HowItWorksSection from '../components/HowItWorksSection.vue'
 import WaitlistSection from '../components/WaitlistSection.vue'
+
+// Define component name for Vue devtools
+defineOptions({
+  name: 'HomePage'
+})
 </script>

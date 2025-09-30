@@ -16,7 +16,7 @@ export class CookieManager {
   loadSettings() {
     try {
       const consent = localStorage.getItem(COOKIE_CONSENT_KEY)
-      const settings = localStorage.getItem(COOKIE_SETTINGS_KEY)
+      // const settings = localStorage.getItem(COOKIE_SETTINGS_KEY)
       
       return {
         showBanner: !consent,
