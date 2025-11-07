@@ -250,7 +250,8 @@
 
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
-import { getWaitlistEntries, getWaitlistAnalytics, type WaitlistEntry, type WaitlistAnalytics } from '../config/api.js'
+import { getWaitlistEntries, getWaitlistAnalytics } from '../config/api.js'
+import type { WaitlistEntry, WaitlistAnalytics, WaitlistListResponse, AnalyticsResponse } from '../config/api.d.ts'
 import { config, validateConfig } from '../config/env.js'
 
 const API_BASE    = config.API_BASE
@@ -402,8 +403,24 @@ const refreshData = async () => {
       getWaitlistAnalytics()
     ])
     
-    waitlistData.value = Array.isArray(data.data) ? { entries: data.data, lastUpdated: null, totalCount: data.data.length } : data.data || { entries: [], lastUpdated: null, totalCount: 0 }
-    analytics.value = analyticsData.data || analytics.value
+    waitlistData.value = Array.isArray(data.entries) ? data : { entries: [], lastUpdated: null, totalCount: 0 }
+    analytics.value = {
+      totalCount: analyticsData.totalEntries || 0,
+      emailSentCount: analytics.value.emailSentCount,
+      pendingCount: analytics.value.pendingCount,
+      priorityAccessCount: analytics.value.priorityAccessCount,
+      lastUpdated: analyticsData.lastUpdated,
+      recentEntries: analytics.value.recentEntries,
+      byExperienceLevel: analytics.value.byExperienceLevel,
+      byFinancialGoals: analytics.value.byFinancialGoals,
+      completionRate: analyticsData.totalEntries > 0 ? 100 : 0,
+      avgPracticeFreq: calculateAveragePracticeFreq(analyticsData.practiceFrequency),
+      topStruggle: getTopStruggle(analyticsData.strugglesKeywords),
+      practiceFrequency: analyticsData.practiceFrequency,
+      matchFrequency: analyticsData.matchFrequency,
+      strugglesKeywords: analyticsData.strugglesKeywords,
+      expectationsKeywords: analyticsData.expectationsKeywords
+    }
     calculateStats()
   } catch (e) {
     console.error(e)
@@ -418,6 +435,33 @@ const refreshData = async () => {
   } finally {
     loading.value = false
   }
+}
+
+function calculateAveragePracticeFreq(practiceFreq: Record<string, any>): number {
+  if (!practiceFreq) return 0
+  let total = 0
+  let count = 0
+  Object.entries(practiceFreq).forEach(([freq, data]) => {
+    if (freq === 'unknown') return
+    const val = freq === '5+' ? 5 : parseFloat(freq.split('-')[0]) || 0
+    const freqCount = typeof data === 'object' ? data.count : data
+    total += val * freqCount
+    count += freqCount
+  })
+  return count > 0 ? Math.round(total / count * 10) / 10 : 0
+}
+
+function getTopStruggle(keywords: Record<string, number> | any[]): string {
+  if (Array.isArray(keywords) && keywords.length > 0) {
+    return keywords[0]
+  }
+  if (typeof keywords === 'object' && keywords !== null) {
+    const entries = Object.entries(keywords)
+    if (entries.length > 0) {
+      return entries[0][0]
+    }
+  }
+  return 'N/A'
 }
 
 const markEmailAsSent = async (entryId: string) => {

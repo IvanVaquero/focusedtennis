@@ -202,7 +202,11 @@
 
 <script setup lang="ts">
 import { ref, reactive, computed } from 'vue'
+import { useQuasar } from 'quasar'
 import { checkEmail, joinWaitlist } from '../config/api.js'
+import type { CheckEmailResponse } from '../config/api.d.ts'
+
+const $q = useQuasar()
 
 const submitting = ref(false)
 const showStepper = ref(false)
@@ -274,8 +278,20 @@ const onSubmitBasicInfo = async () => {
     // Check if email already exists
     const emailCheck = await checkEmail(form.email)
     
-    if (emailCheck.data) {
-      alert('This email is already on the waitlist!')
+    if (emailCheck.exists) {
+      $q.notify({
+        type: 'info',
+        message: 'You\'re already on the waitlist!',
+        caption: 'This email address has already been registered.',
+        position: 'top',
+        timeout: 4000,
+        icon: 'info',
+        color: 'blue-6',
+        textColor: 'white',
+        actions: [
+          { label: 'Dismiss', color: 'white', handler: () => { /* dismiss */ } }
+        ]
+      })
       submitting.value = false
       return
     }
@@ -285,7 +301,19 @@ const onSubmitBasicInfo = async () => {
     currentQuestion.value = 0
   } catch (error) {
     console.error('Error checking email:', error)
-    alert('There was an error. Please try again.')
+    $q.notify({
+      type: 'negative',
+      message: 'Oops! Something went wrong',
+      caption: 'Please try again in a moment.',
+      position: 'top',
+      timeout: 4000,
+      icon: 'error',
+      color: 'red-6',
+      textColor: 'white',
+      actions: [
+        { label: 'Dismiss', color: 'white', handler: () => { /* dismiss */ } }
+      ]
+    })
   } finally {
     submitting.value = false
   }
@@ -335,7 +363,19 @@ const onSubmitComplete = async () => {
     
   } catch (error) {
     console.error('Error submitting to waitlist:', error)
-    alert('There was an error submitting your information. Please try again.')
+    $q.notify({
+      type: 'negative',
+      message: 'Submission Failed',
+      caption: 'There was an error submitting your information. Please try again.',
+      position: 'top',
+      timeout: 5000,
+      icon: 'warning',
+      color: 'red-6',
+      textColor: 'white',
+      actions: [
+        { label: 'Dismiss', color: 'white', handler: () => { /* dismiss */ } }
+      ]
+    })
   } finally {
     submitting.value = false
   }

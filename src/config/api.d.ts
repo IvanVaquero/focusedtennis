@@ -36,8 +36,8 @@ export interface WaitlistAnalytics {
   topStruggle: string;
   practiceFrequency: Record<string, { count: number; percentage: number }>;
   matchFrequency: Record<string, { count: number; percentage: number }>;
-  strugglesKeywords: string[];
-  expectationsKeywords: string[];
+  strugglesKeywords: Record<string, number> | string[];
+  expectationsKeywords: Record<string, number> | string[];
 }
 
 export interface ApiResponse<T> {
@@ -47,9 +47,33 @@ export interface ApiResponse<T> {
   message?: string;
 }
 
-export declare function getWaitlistEntries(): Promise<ApiResponse<WaitlistEntry[]>>;
-export declare function getWaitlistAnalytics(): Promise<ApiResponse<WaitlistAnalytics>>;
+export interface CheckEmailResponse {
+  ok: boolean;
+  exists: boolean;
+  error?: string;
+}
+
+export interface WaitlistListResponse {
+  entries: WaitlistEntry[];
+  totalCount: number;
+  lastUpdated: string;
+}
+
+export interface AnalyticsResponse {
+  totalEntries: number;
+  practiceFrequency: Record<string, { count: number; percentage: number }>;
+  matchFrequency: Record<string, { count: number; percentage: number }>;
+  commonStruggles: string[];
+  commonExpectations: string[];
+  strugglesKeywords: Record<string, number>;
+  expectationsKeywords: Record<string, number>;
+  signupTrends: Record<string, number>;
+  lastUpdated: string;
+}
+
+export declare function getWaitlistEntries(): Promise<WaitlistListResponse>;
+export declare function getWaitlistAnalytics(): Promise<AnalyticsResponse>;
 export declare function sendWaitlistEmail(entryId: string): Promise<ApiResponse<boolean>>;
 export declare function clearWaitlist(): Promise<ApiResponse<boolean>>;
-export declare function checkEmail(email: string): Promise<ApiResponse<boolean>>;
+export declare function checkEmail(email: string): Promise<CheckEmailResponse>;
 export declare function joinWaitlist(data: Record<string, unknown>): Promise<ApiResponse<WaitlistEntry>>;

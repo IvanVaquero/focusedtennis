@@ -1,10 +1,14 @@
 // API Configuration for FocusedTennis
+import { config } from './env.js'
+
 export const API_CONFIG = {
-  // Base URL for PHP API (adjust for your server setup)
-  BASE_URL: 'http://localhost:8000/php/api', // Change this to your PHP server URL
+  // Base URL for PHP API - automatically uses correct URL based on environment
+  // Development: http://localhost:8000/php (from .env.local)
+  // Production: https://fctennispro.com/php (default)
+  BASE_URL: config.API_BASE + '/api',
   
   // Admin token for API authentication
-  ADMIN_TOKEN: '9f2a7b4c5d8e10a3b6c9d2e4f7a1b3c59d7e4f2a1c0b8d7e6f5a4c3b2d1e0f9',
+  ADMIN_TOKEN: config.ADMIN_TOKEN,
   
   // API endpoints
   ENDPOINTS: {
@@ -13,6 +17,22 @@ export const API_CONFIG = {
     LIST_WAITLIST: '/waitlist-list.php',
     ANALYTICS: '/waitlist-analytics.php'
   }
+}
+
+// Log configuration in development mode
+if (import.meta.env.DEV) {
+  console.log('🔧 API Configuration:')
+  console.log('   Environment:', import.meta.env.MODE)
+  console.log('   API Base URL:', API_CONFIG.BASE_URL)
+  console.log('   🔵 DEV MODE: Connecting to LOCAL PHP server')
+  console.log('   📁 Data saves to: LOCAL storage file')
+  console.log('   ⚠️  This is CORRECT for development!')
+} else {
+  console.log('🚀 API Configuration:')
+  console.log('   Environment:', 'production')
+  console.log('   API Base URL:', API_CONFIG.BASE_URL)
+  console.log('   🟢 PRODUCTION: Connecting to Hostinger server')
+  console.log('   📁 Data saves to: HOSTINGER storage file')
 }
 
 // API helper functions

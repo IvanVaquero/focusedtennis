@@ -1,1 +1,2 @@
-Require all denied
+# Protect storage directory from direct access
+Deny from all
